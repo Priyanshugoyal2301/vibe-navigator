@@ -5,7 +5,7 @@ async function search() {
   resultArea.innerHTML = '';
 
   try {
-    const res = await fetch("http://127.0.0.1:8000/get-vibes", {
+    const res = await fetch("https://vibe-backend-crwk.onrender.com/get-vibes", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

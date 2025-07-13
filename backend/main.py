@@ -10,20 +10,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/")
-def read_root():
-    return {"message": "Vibe Navigator Backend is Running!"}
-
 @app.post("/get-vibes")
 async def get_vibes(request: Request):
     data = await request.json()
-    city = data.get("city")
-    category = data.get("category")
+    city = data.get("city", "").strip().lower()
+    category = data.get("category", "").strip().lower()
 
-    # Dummy response for now
-    return {
-        "results": [
-            {"name": "Oceanic Café", "summary": "🌊 Cozy with a sea breeze vibe, perfect for sunsets."},
-            {"name": "City Chill Park", "summary": "🌳 Quiet, green, and full of relaxed locals."}
-        ]
-    }
+    if city == "new delhi" and category == "cafe":
+        return {
+            "results": [
+                {"name": "Oceanic Café", "summary": "🌊 Cozy with a sea breeze vibe, perfect for sunsets."},
+                {"name": "City Chill Park", "summary": "🌳 Quiet, green, and full of relaxed locals."}
+            ]
+        }
+    return {"results": []}
